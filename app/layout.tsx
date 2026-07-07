@@ -23,9 +23,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://landing-voces.vercel.app"),
   title: "S.O.S Voces por Venezuela | Maratón de solidaridad",
   description:
     "Cada voz puede convertirse en ayuda. Únete a la maratón que une voces en solidaridad por Venezuela.",
+  openGraph: {
+    title: "S.O.S Voces por Venezuela",
+    description:
+      "Cada voz puede convertirse en ayuda. Únete a la maratón que une voces en solidaridad por Venezuela.",
+    url: "/",
+    siteName: "S.O.S Voces por Venezuela",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "S.O.S Voces por Venezuela",
+    description:
+      "Cada voz puede convertirse en ayuda. Únete a la maratón que une voces en solidaridad por Venezuela.",
+    images: ["/api/og"],
+  },
 };
 
 export default function RootLayout({

@@ -16,7 +16,7 @@ export default function FooterSection() {
             Instagram
           </a>
           <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">
-            Twitter
+            X
           </a>
           <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">
             TikTok

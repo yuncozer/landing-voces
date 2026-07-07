@@ -21,17 +21,9 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0c1a3e]/90 via-[#17408B]/40 to-[#0c1a3e]/80 z-10" />
 
-      <div className="relative z-20 min-h-dvh flex flex-col items-center justify-center md:pb-24 gap-20 3xl:gap-28">
+      <div className="relative z-20 min-h-dvh flex flex-col items-center justify-center md:pb-12 gap-20 3xl:gap-28">
 
-        <div className="flex flex-col max-w-4xl text-center items-center pt-3 md:pt-20 gap-6">
-          <Image
-            src="/Images/Logo.png"
-            alt="S.O.S Voces por Venezuela"
-            width={56}
-            height={53}
-            className="h-10 sm:h-12 md:h-14 w-auto brightness-0 invert opacity-80"
-            priority
-          />
+        <div className="flex flex-col max-w-4xl text-center items-center pt-3 md:pt-16 gap-6">
           <p className="font-heading text-yellow-brand font-semibold tracking-[0.2em] uppercase text-xs md:text-sm">
             Maratón de solidaridad
           </p>
@@ -40,12 +32,20 @@ export default function HeroSection() {
             <br />
             <span className="italic text-yellow-brand">convertirse en ayuda</span>
           </h1>
-          <p className="font-body text-white/70 font-bold text-sm md:text-lg max-w-lg text-center leading-relaxed">
+          <p className="font-body text-white/70 font-bold text-sm md:text-lg text-center leading-relaxed max-w-[90%]">
             S.O.S Voces por Venezuela — una maratón que une voces en solidaridad por Venezuela.
           </p>
         </div>
 
         <div className="flex flex-col X items-center gap-10 md:gap-12">
+          <Image
+            src="/Images/Logo.png"
+            alt="S.O.S Voces por Venezuela"
+            width={56}
+            height={53}
+            className="h-10 sm:h-12 md:h-14 w-auto brightness-0 invert opacity-80"
+            priority
+          />
           <CountdownTimer targetDate="2026-07-13T00:00:00-04:00" />
           <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 ">
             <a href="#join" className="btn btn--primary">
@@ -56,9 +56,8 @@ export default function HeroSection() {
             </a>
           </div>
         </div>
-
+        <ScrollIndicator />
       </div>
-      <ScrollIndicator />
     </section>
   );
 }

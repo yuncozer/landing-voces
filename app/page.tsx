@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Nav />
       <ScrollReveal />
-      <main>
+      <main className="mt-16 md:mt-20">
         <Hero />
         <About />
         <Steps />

@@ -82,7 +82,7 @@ export default function VoicesSection() {
             Voces que se unen
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
-            Una conversación que crece
+            Una conversacion que crece
           </h2>
         </div>
 

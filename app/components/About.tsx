@@ -34,7 +34,7 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto">
         <div className="reveal reveal-signal max-w-2xl">
           <p className="font-heading text-blue-brand font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-            Sobre el movimiento
+            Quiénes Somos
           </p>
           <h2 className="font-display text-blue-brand text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">
             ¿Que es S.O.S Voces por Venezuela?

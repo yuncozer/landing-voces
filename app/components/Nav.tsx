@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { href: "#about", label: "Sobre" },
+  { href: "#about", label: "Quiénes Somos" },
   { href: "#how", label: "Suma tu voz" },
   { href: "#voices", label: "Voces" },
 ];

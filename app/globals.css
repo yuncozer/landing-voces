@@ -36,7 +36,7 @@ body {
 .sound-wave-ring {
   position: absolute;
   left: 50%;
-  top: 57%;
+  top: 50%;
   border-radius: 50%;
   border-width: 2px;
   border-style: solid;
@@ -58,6 +58,10 @@ body {
 
 .sound-waves--offset {
   transform: translateY(8vh);
+}
+
+.sound-waves--center {
+  transform: translateY(0);
 }
 
 @keyframes sound-pulse {
@@ -213,8 +217,7 @@ body {
 
 @media (max-width: 639px) {
   .sound-wave-ring:nth-child(n+4) { display: none; }
-  .sound-wave-ring { top: 49%; }
-  .sound-waves--offset { transform: translateY(4vh); }
+  .sound-wave-ring { top: 48%; }
 }
 
 @media (max-width: 639px) {

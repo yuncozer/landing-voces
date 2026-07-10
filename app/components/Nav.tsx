@@ -42,7 +42,7 @@ export default function Nav() {
       } ${scrolled ? "shadow-lg" : ""}`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
-        <a href="#hero" className="no-underline flex items-center">
+        <a href="#hero" className="no-underline flex items-center gap-3">
           <Image
             src="/Images/Logo.png"
             alt="S.O.S Voces por Venezuela"
@@ -50,6 +50,13 @@ export default function Nav() {
             height={150}
             className="h-16 w-auto transition-all duration-500"
           />
+          <span
+            className={`font-display text-xl md:text-3xl font-semibold leading-none transition-colors duration-500 ${
+              isWhite ? "text-red-brand" : "text-white"
+            }`}
+          >
+            S.O.S Voces por Venezuela
+          </span>
         </a>
 
         <nav className="hidden md:flex items-center gap-8">

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import SoundWaves from "@/app/components/SoundWaves";
 import CountdownTimer from "@/app/components/CountdownTimer";
@@ -46,14 +48,24 @@ export default function HeroSection() {
             className="h-10 sm:h-12 md:h-14 w-auto brightness-0 invert opacity-80"
             priority
           />
-          <CountdownTimer targetDate="2026-07-13T00:00:00-04:00" />
+          <CountdownTimer targetDate="2026-07-10T10:00:00-04:00" />
           <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 ">
             <a href="#join" className="btn btn--primary">
               Suma tu voz
             </a>
-            <a href="#how" className="btn btn--white-outline">
+            <button
+              onClick={() => {
+                const text = `¡Únete a S.O.S Voces por Venezuela y haz que tu voz llegue más lejos!`;
+                if (navigator.share) {
+                  navigator.share({ title: "S.O.S Voces por Venezuela", text, url: window.location.href }).catch(() => {});
+                } else {
+                  navigator.clipboard.writeText(`${text} ${window.location.href}`).catch(() => {});
+                }
+              }}
+              className="btn btn--white-outline"
+            >
               Haz que llegue más lejos
-            </a>
+            </button>
           </div>
         </div>
         <ScrollIndicator />

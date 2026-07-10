@@ -20,10 +20,10 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-function TimeUnit({ value, label }: { value: string; label: string }) {
+function TimeUnit({ value, label, color }: { value: string; label: string; color: string }) {
   return (
     <div className="flex flex-col items-center gap-0.5">
-      <span className="text-5xl md:text-6xl lg:text-8xl font-heading font-bold text-blue-brand tabular-nums leading-none text-glow-sm">
+      <span className={`text-5xl md:text-6xl lg:text-8xl font-heading font-bold ${color} tabular-nums leading-none text-glow-sm`}>
         {value}
       </span>
       <span className="text-[11px] md:text-sm text-white font-heading uppercase tracking-wider">
@@ -45,19 +45,21 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
+  const color = isBefore ? "text-blue-brand" : "text-red-brand";
+
   return (
     <div className="flex flex-col items-center text-glow-sm mt-4 md:mt-6">
       <p className="font-heading text-white text-sm md:text-base tracking-[0.15em] uppercase mb-2 md:mb-3">
-        {isBefore ? "Comienza en" : "Llevamos"}
+        {isBefore ? "Comienza en" : "Llevamos al aire"}
       </p>
       <div className="flex items-start gap-3 md:gap-4">
-        <TimeUnit value={pad(days)} label="días" />
+        <TimeUnit value={pad(days)} label="días" color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(hours)} label="horas" />
+        <TimeUnit value={pad(hours)} label="horas" color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(minutes)} label="min" />
+        <TimeUnit value={pad(minutes)} label="min" color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(seconds)} label="seg" />
+        <TimeUnit value={pad(seconds)} label="seg" color={color} />
       </div>
     </div>
   );

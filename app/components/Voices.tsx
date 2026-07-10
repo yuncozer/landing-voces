@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, memo } from "react";
+import { useTranslate } from "@/app/lib/LanguageContext";
 
 interface TweetUser {
   id_str: string;
@@ -41,9 +42,13 @@ interface Tweet {
   };
 }
 
-function formatDate(dateStr: string): string {
+function formatDate(dateStr: string, t: (key: string) => string | string[]): string {
   const d = new Date(dateStr);
-  const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+  const months = [
+    t("month.1"), t("month.2"), t("month.3"), t("month.4"),
+    t("month.5"), t("month.6"), t("month.7"), t("month.8"),
+    t("month.9"), t("month.10"), t("month.11"), t("month.12"),
+  ] as string[];
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
@@ -59,6 +64,7 @@ function formatCount(n: number | undefined | null): string {
 }
 
 export default function VoicesSection() {
+  const { t } = useTranslate();
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState(true);
   const done = useRef(false);
@@ -87,10 +93,10 @@ export default function VoicesSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="reveal reveal-signal text-center mb-14">
           <p className="font-heading text-yellow-brand font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-            Voces que se unen
+            {t("voices.eyebrow")}
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
-            Una conversacion que crece
+            {t("voices.title")}
           </h2>
         </div>
 
@@ -100,7 +106,7 @@ export default function VoicesSection() {
           <InfiniteCarousel tweets={tweets} />
         ) : (
           <div className="flex justify-center py-8 text-white/40 text-sm">
-            No se pudieron cargar los tweets
+            {t("voices.fallback")}
           </div>
         )}
 
@@ -112,7 +118,7 @@ export default function VoicesSection() {
             className="inline-flex items-center gap-2 font-heading text-white/30 hover:text-yellow-brand text-xs tracking-[0.2em] uppercase transition-colors"
           >
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-            Ver en X
+            {t("voices.viewOnX")}
           </a>
         </div>
       </div>
@@ -174,6 +180,7 @@ function InfiniteCarousel({ tweets }: { tweets: Tweet[] }) {
 }
 
 const TweetCard = memo(function TweetCard({ tweet }: { tweet: Tweet }) {
+  const { t } = useTranslate();
   const hasImage = tweet.mediaDetails?.some((m) => m.type === "photo");
   const images = tweet.mediaDetails?.filter((m) => m.type === "photo") ?? [];
 
@@ -193,7 +200,7 @@ const TweetCard = memo(function TweetCard({ tweet }: { tweet: Tweet }) {
             </span>
             {tweet.user.is_blue_verified && (
               <svg viewBox="0 0 22 22" width="14" height="14" className="shrink-0">
-                <path fill="#F7C400" d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.97-1.438-1.242.102-.46.06-.94-.162-1.377-.22-.438-.61-.78-1.086-.99-.07-1.006-.56-1.934-1.33-2.532-.77-.6-1.75-.88-2.74-.72-.142-.44-.42-.82-.79-1.07-.372-.25-.81-.36-1.25-.33-.44.03-.86.19-1.22.46l.002.002c-.17-.1-.36-.17-.55-.22-.19-.05-.39-.08-.59-.08-.2 0-.4.03-.59.08-.19.05-.38.12-.55.22l.002-.002c-.36-.27-.78-.43-1.22-.46-.44-.03-.878.08-1.25.33-.37.25-.648.63-.79 1.07-.99-.16-1.97.12-2.74.72-.77.598-1.26 1.526-1.33 2.532-.476.21-.866.552-1.086.99-.222.437-.264.917-.162 1.377-.586.272-1.084.702-1.438 1.242-.355.54-.552 1.17-.57 1.816.018.646.215 1.275.57 1.816.354.54.852.97 1.438 1.242-.102.46-.06.94.162 1.377.22.438.61.78 1.086.99.07 1.006.56 1.934 1.33 2.532.77.6 1.75.88 2.74.72.142.44.42.82.79 1.07.372.25.81.36 1.25.33.44-.03.86-.19 1.22-.46l-.002-.002c.17.1.36.17.55.22.19.05.39.08.59.08.2 0 .4-.03.59-.08.19-.05.38-.12.55-.22l-.002.002c.36.27.78.43 1.22.46.44.03.878-.08 1.25-.33.37-.25.648-.63.79-1.07.99.16 1.97-.12 2.74-.72.77-.598 1.26-1.526 1.33-2.532.476-.21.866-.552 1.086-.99.222-.437.264-.917.162-1.377.586-.272 1.084-.702 1.438-1.242.355-.54.552-1.17.57-1.816z" />
+                <path fill="#F7C400" d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.97-1.438-1.242.102-.46.06-.94-.162-1.377-.22-.438-.61-.78-1.086-.99-.07-1.006-.56-1.934-1.33-2.532-.77-.6-1.75-.88-2.74-.72-.142-.44-.42-.82-.79-1.07-.372-.25-.81-.36-1.25-.33-.44.03-.86.19-1.22.46l.002.002c-.17-.1-.36-.17-.55-.22-.19-.05-.39-.08-.59-.08-.2 0-.4.03-.59.08-.19.05-.38.12-.55.22l.002-.002c-.36-.27-.78-.43-1.22-.46-.44-.03-.878.08-1.25.33-.37.25-.648.63-.79 1.07-.99-.16-1.97.12-2.74.72-.77.598-1.26 1.526-1.33 2.532-.476.21-.866.552-1.086.99-.222.437-.264.917-.162 1.377-.586.272-1.084.702-1.438 1.242-.355.54-.552 1.17-.57 1.816.018.646.215 1.275.57 1.816.354.54.852.97 1.438 1.242-.102.46-.06.94.162 1.377.22.438.61.78 1.086.99.07 1.006.56 1.934 1.33 2.532.77.6 1.75.88 2.74.72.142.44.42.82.79 1.07.372.25.81.36 1.25.33.44-.03.86-.19 1.22-.46l-.002-.002c.17.1.36.17.55.22.19.05.39.08.59.08.2 0 .4-.03.59-.08.19-.05.38-.12.55-.22l-.002.002c.36.27.78.43 1.22.46.44.03.878-.08 1.25-.33.37-.25.648-.63.79-1.07.99.16 1.97-.12 2.74-.72.77-.598 1.26-1.526 1.33-2.532.476-.21.866-.552 1.086-.99.222-.437.264-.917.162-1.377.586-.272 1.084-.702 1.438 1.242.355-.54.552-1.17.57-1.816z" />
                 <path fill="#fff" d="M9.642 14.622a.97.97 0 0 1-.707-.3L6.65 12.05a.96.96 0 0 1 0-1.37 1.05 1.05 0 0 1 1.444 0l1.517 1.47 4.236-4.39a1.06 1.06 0 0 1 1.466-.02c.415.38.43 1.015.033 1.416l-4.98 5.157a.99.99 0 0 1-.707.31z" />
               </svg>
             )}
@@ -202,7 +209,7 @@ const TweetCard = memo(function TweetCard({ tweet }: { tweet: Tweet }) {
             </span>
             <span className="text-white/15 text-[10px]">·</span>
             <span className="font-heading text-[11px] text-white/35 whitespace-nowrap">
-              {formatDate(tweet.created_at)}
+              {formatDate(tweet.created_at, t)}
             </span>
           </div>
         </div>

@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslate } from "@/app/lib/LanguageContext";
 
 export default function FooterSection() {
+  const { t } = useTranslate();
   return (
     <footer className="bg-gray-dark text-white/50 py-6 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -13,17 +17,14 @@ export default function FooterSection() {
         />
         <div className="flex gap-8 text-xs font-heading font-semibold tracking-wider uppercase">
           <a href="https://www.instagram.com/sosvocesporvenezuela" target="_blank" rel="noopener noreferrer" className="text-white/40 no-underline hover:text-white transition-colors">
-            Instagram
+            {t("footer.instagram")}
           </a>
           <a href="https://x.com/sosvocesporvzla" target="_blank" rel="noopener noreferrer" className="text-white/40 no-underline hover:text-white transition-colors">
-            X
-          </a>
-          <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">
-            TikTok
+            {t("footer.x")}
           </a>
         </div>
         <div className="text-xs text-white/30">
-          &copy; 2026 Voces por Venezuela
+          {t("footer.copyright")}
         </div>
       </div>
     </footer>

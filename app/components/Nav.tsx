@@ -2,18 +2,20 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-
-const navLinks = [
-  { href: "#about", label: "Quiénes Somos" },
-  { href: "#how", label: "Suma tu voz" },
-  { href: "#voices", label: "Voces" },
-  { href: "#directorio", label: "Donar" },
-];
+import { useTranslate } from "@/app/lib/LanguageContext";
 
 export default function Nav() {
+  const { t, locale, setLocale } = useTranslate();
   const [scrolled, setScrolled] = useState(false);
   const [isWhite, setIsWhite] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#about", label: t("nav.about") as string },
+    { href: "#how", label: t("nav.how") as string },
+    { href: "#voices", label: t("nav.voices") as string },
+    { href: "#directorio", label: t("nav.donate") as string },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -60,7 +62,7 @@ export default function Nav() {
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -82,14 +84,45 @@ export default function Nav() {
                 : "bg-yellow-brand text-blue-brand hover:bg-yellow-brand/90"
             }`}
           >
-            Únete
+            {t("nav.join")}
           </a>
+          <div className="flex items-center gap-1 font-heading text-xs font-semibold">
+            <button
+              onClick={() => setLocale("es")}
+              className={`cursor-pointer px-1.5 py-1 rounded transition-colors ${
+                locale === "es"
+                  ? isWhite
+                    ? "text-yellow-brand"
+                    : "text-yellow-brand"
+                  : isWhite
+                    ? "text-blue-brand/40 hover:text-blue-brand/70"
+                    : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              ES
+            </button>
+            <span className={isWhite ? "text-blue-brand/20" : "text-white/20"}>/</span>
+            <button
+              onClick={() => setLocale("en")}
+              className={`cursor-pointer px-1.5 py-1 rounded transition-colors ${
+                locale === "en"
+                  ? isWhite
+                    ? "text-yellow-brand"
+                    : "text-yellow-brand"
+                  : isWhite
+                    ? "text-blue-brand/40 hover:text-blue-brand/70"
+                    : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              EN
+            </button>
+          </div>
         </nav>
 
         <button
           className="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={menuOpen ? (t("nav.menuOpen") as string) : (t("nav.menuClose") as string)}
         >
           <span
             className={`block w-6 h-0.5 transition-all duration-300 ${
@@ -138,8 +171,31 @@ export default function Nav() {
                 : "bg-yellow-brand text-blue-brand hover:bg-yellow-brand/90"
             }`}
           >
-            Únete
+            {t("nav.join")}
           </a>
+          <div className="flex items-center gap-1 font-heading text-sm font-semibold">
+            <button
+              onClick={() => setLocale("es")}
+              className={`cursor-pointer px-2 py-1 rounded transition-colors ${
+                locale === "es"
+                  ? isWhite ? "text-yellow-brand" : "text-yellow-brand"
+                  : isWhite ? "text-blue-brand/40 hover:text-blue-brand/70" : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              ES
+            </button>
+            <span className={isWhite ? "text-blue-brand/20" : "text-white/20"}>/</span>
+            <button
+              onClick={() => setLocale("en")}
+              className={`cursor-pointer px-2 py-1 rounded transition-colors ${
+                locale === "en"
+                  ? isWhite ? "text-yellow-brand" : "text-yellow-brand"
+                  : isWhite ? "text-blue-brand/40 hover:text-blue-brand/70" : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              EN
+            </button>
+          </div>
         </nav>
       </div>
     </header>

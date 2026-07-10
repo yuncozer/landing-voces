@@ -1,67 +1,75 @@
-import { Mic, Share2, UserPlus } from "lucide-react";
+"use client";
 
-const steps = [
+import { useState, useEffect } from "react";
+import { ExternalLink, Headphones, Mic } from "lucide-react";
+import { useTranslate } from "@/app/lib/LanguageContext";
+
+const stepKeys = [
   {
     number: "01",
-    icon: Mic,
-    title: "Graba tu mensaje",
-    accent: "blue-brand",
+    icon: ExternalLink,
+    titleKey: "steps.step1.title",
+    descKey: "steps.step1.desc",
+    hasLink: true,
+    accent: "text-blue-brand",
     accentBg: "bg-blue-brand",
     accentBorder: "border-blue-brand/20",
     accentLight: "bg-blue-brand/[0.04]",
-    content: (
-      <>
-        Tu testimonio, tu canción, tus palabras.{' '}
-        <span className="italic">Cualquier voz suma.</span>
-      </>
-    ),
   },
   {
     number: "02",
-    icon: Share2,
-    title: "Comparte en redes",
+    icon: Headphones,
+    titleKey: "steps.step2.title",
+    descKey: "steps.step2.desc",
+    hasLink: false,
     accent: "text-yellow-brand",
     accentBg: "bg-yellow-brand",
     accentBorder: "border-yellow-brand/20",
     accentLight: "bg-yellow-brand/[0.06]",
-    content: (
-      <>
-        Usa <strong>#VocesPorVenezuela</strong> y haz que el mensaje llegue lejos.
-      </>
-    ),
   },
   {
     number: "03",
-    icon: UserPlus,
-    title: "Invita a otras voces",
+    icon: Mic,
+    titleKey: "steps.step3.title",
+    descKey: "steps.step3.desc",
+    hasLink: false,
     accent: "text-red-brand",
     accentBg: "bg-red-brand",
     accentBorder: "border-red-brand/20",
     accentLight: "bg-red-brand/[0.04]",
-    content: (
-      <>
-        Cada persona que sumas multiplica la esperanza.
-      </>
-    ),
   },
 ];
 
 export default function StepsSection() {
+  const { t } = useTranslate();
+  const [ctaUrl, setCtaUrl] = useState("#");
+
+  useEffect(() => {
+    fetch("/api/cta-link")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.url && data.url !== "#") {
+          setCtaUrl(data.url);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section id="how" data-nav="blue" className="reveal-section py-24 md:py-32 px-6 bg-gray-light">
       <div className="max-w-6xl mx-auto">
         <div className="reveal reveal-signal text-center mb-20">
           <p className="font-heading text-blue-brand font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-            Cómo participar
+            {t("steps.eyebrow")}
           </p>
           <h2 className="font-display text-blue-brand text-4xl md:text-5xl lg:text-7xl leading-tight">
-            Suma tu voz
+            {t("steps.title")}
           </h2>
         </div>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6 md:gap-8">
-          {steps.map((s, i) => (
-            <StepItem key={s.number} {...s} index={i} />
+          {stepKeys.map((s, i) => (
+            <StepItem key={s.number} number={s.number} icon={s.icon} title={t(s.titleKey) as string} content={t(s.descKey) as string} hasLink={s.hasLink} ctaUrl={ctaUrl} descBefore={s.hasLink ? (t("steps.step1.descBefore") as string) : ""} linkText={s.hasLink ? (t("steps.step1.linkText") as string) : ""} descAfter={s.hasLink ? (t("steps.step1.descAfter") as string) : ""} accent={s.accent} accentBg={s.accentBg} accentBorder={s.accentBorder} accentLight={s.accentLight} index={i} />
           ))}
         </div>
       </div>
@@ -74,6 +82,11 @@ function StepItem({
   icon: Icon,
   title,
   content,
+  hasLink,
+  ctaUrl,
+  descBefore,
+  linkText,
+  descAfter,
   accent,
   accentBg,
   accentBorder,
@@ -83,7 +96,12 @@ function StepItem({
   number: string;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
-  content: React.ReactNode;
+  content: string;
+  hasLink: boolean;
+  ctaUrl: string;
+  descBefore: string;
+  linkText: string;
+  descAfter: string;
   accent: string;
   accentBg: string;
   accentBorder: string;
@@ -112,7 +130,17 @@ function StepItem({
           {title}
         </h3>
         <p className="font-body text-gray-dark text-sm leading-relaxed max-w-xs">
-          {content}
+          {hasLink ? (
+            <>
+              {descBefore}
+              <a href={ctaUrl} target="_blank" rel="noopener noreferrer" className="text-blue-brand underline font-semibold hover:text-yellow-brand transition-colors">
+                {linkText}
+              </a>
+              {descAfter}
+            </>
+          ) : (
+            content
+          )}
         </p>
       </div>
     </div>

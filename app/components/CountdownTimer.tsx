@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslate } from "@/app/lib/LanguageContext";
 
 interface CountdownTimerProps {
   targetDate: string;
@@ -34,6 +35,7 @@ function TimeUnit({ value, label, color }: { value: string; label: string; color
 }
 
 export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
+  const { t } = useTranslate();
   const target = new Date(targetDate).getTime();
   const now = useNow();
   const isBefore = now < target;
@@ -50,16 +52,16 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   return (
     <div className="flex flex-col items-center text-glow-sm mt-4 md:mt-6">
       <p className="font-heading text-white text-sm md:text-base tracking-[0.15em] uppercase mb-2 md:mb-3">
-        {isBefore ? "Comienza en" : "Llevamos al aire"}
+        {isBefore ? t("countdown.before") : t("countdown.after")}
       </p>
       <div className="flex items-start gap-3 md:gap-4">
-        <TimeUnit value={pad(days)} label="días" color={color} />
+        <TimeUnit value={pad(days)} label={t("countdown.days") as string} color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(hours)} label="horas" color={color} />
+        <TimeUnit value={pad(hours)} label={t("countdown.hours") as string} color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(minutes)} label="min" color={color} />
+        <TimeUnit value={pad(minutes)} label={t("countdown.minutes") as string} color={color} />
         <span className="text-white/30 text-3xl md:text-4xl font-heading font-bold leading-none mt-1">:</span>
-        <TimeUnit value={pad(seconds)} label="seg" color={color} />
+        <TimeUnit value={pad(seconds)} label={t("countdown.seconds") as string} color={color} />
       </div>
     </div>
   );

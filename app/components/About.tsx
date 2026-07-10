@@ -1,55 +1,36 @@
+"use client";
+
 import Image from "next/image";
 import { Heart, Star, Handshake, HandHelping } from "lucide-react";
+import { useTranslate } from "@/app/lib/LanguageContext";
 
-const values = [
-  {
-    icon: Heart,
-    label: "Solidaridad",
-    description: "Apoyo mutuo que cruza fronteras",
-    image: "/Images/solidaridad.webp",
-  },
-  {
-    icon: Star,
-    label: "Esperanza",
-    description: "Creer en un futuro mejor",
-    image: "/Images/esperanza.jpg",
-  },
-  {
-    icon: Handshake,
-    label: "Unidad",
-    description: "Voces que se encuentran",
-    image: "/Images/unidad.jpeg",
-  },
-  {
-    icon: HandHelping,
-    label: "Acción",
-    description: "Solidaridad que se mueve",
-    image: "/Images/accion.jpeg",
-  },
+const valueKeys = [
+  { icon: Heart, labelKey: "about.value1.label", descKey: "about.value1.desc", image: "/Images/solidaridad.webp" },
+  { icon: Star, labelKey: "about.value2.label", descKey: "about.value2.desc", image: "/Images/esperanza.jpg" },
+  { icon: Handshake, labelKey: "about.value3.label", descKey: "about.value3.desc", image: "/Images/unidad.jpeg" },
+  { icon: HandHelping, labelKey: "about.value4.label", descKey: "about.value4.desc", image: "/Images/accion.jpeg" },
 ];
 
 export default function AboutSection() {
+  const { t } = useTranslate();
   return (
     <section id="about" data-nav="blue" className="reveal-section py-24 md:py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="reveal reveal-signal max-w-2xl">
           <p className="font-heading text-blue-brand font-semibold tracking-[0.2em] uppercase text-xs mb-4">
-            Quiénes Somos
+            {t("about.eyebrow")}
           </p>
           <h2 className="font-display text-blue-brand text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">
-            ¿Que es S.O.S Voces por Venezuela?
+            {t("about.title")}
           </h2>
           <p className="font-body text-gray-dark/60 text-base md:text-lg leading-relaxed">
-            Un movimiento que transforma la solidaridad en acción. Cada persona que alza su voz
-            se convierte en parte de una red de esperanza que cruza fronteras. No se trata solo
-            de compartir información — se trata de construir un futuro donde todas las voces
-            sean escuchadas.
+            {t("about.body")}
           </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-16 md:mt-20 reveal reveal-delay-1">
-          {values.map((v) => (
-            <ValueItem key={v.label} {...v} />
+          {valueKeys.map((v) => (
+            <ValueItem key={v.labelKey} icon={v.icon} label={t(v.labelKey) as string} description={t(v.descKey) as string} image={v.image} />
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { LanguageProvider } from "@/app/lib/LanguageContext";
 
 const marykate = localFont({
   src: "../public/fonts/MaryKate.ttf",
@@ -63,7 +64,9 @@ export default function RootLayout({
       className={`${marykate.variable} ${poppins.variable} ${inter.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-gray-dark font-body">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

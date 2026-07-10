@@ -64,7 +64,7 @@ const translations: Record<string, Record<string, string | string[]>> = {
     "directorio.eyebrow": "Opciones para apoyar",
     "directorio.title": "Elige tu forma de ayudar",
     "directorio.subtitle": "Cada organización tiene una labor única en el terreno. Encuentra la iniciativa que mejor conecte contigo y súmate hoy.",
-    "directorio.donate": "Donar",
+    "directorio.donate": "Conoce más",
 
     "directorio.yummy.desc": "Campaña de Yummy (Vicente Zavarce). Iguala el 25% de tu aporte.",
     "directorio.yummy.methods": ["Tarjeta", "App Yummy"],
@@ -169,7 +169,7 @@ const translations: Record<string, Record<string, string | string[]>> = {
     "directorio.eyebrow": "Ways to support",
     "directorio.title": "Choose your way to help",
     "directorio.subtitle": "Each organization has a unique mission on the ground. Find the initiative that resonates with you and join today.",
-    "directorio.donate": "Donate",
+    "directorio.donate": "Learn more",
 
     "directorio.yummy.desc": "Yummy campaign (Vicente Zavarce). They match 25% of your donation.",
     "directorio.yummy.methods": ["Card", "Yummy App"],

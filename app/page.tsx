@@ -7,6 +7,7 @@ import About from "@/app/components/About";
 const Steps = dynamic(() => import("@/app/components/Steps"), { ssr: true });
 const Voices = dynamic(() => import("@/app/components/Voices"), { ssr: true });
 const Cta = dynamic(() => import("@/app/components/Cta"), { ssr: true });
+const Directorio = dynamic(() => import("@/app/components/Directorio"), { ssr: true });
 const Footer = dynamic(() => import("@/app/components/Footer"), { ssr: true });
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <Steps />
         <Voices />
         <Cta />
+        <Directorio />
       </main>
       <Footer />
     </>

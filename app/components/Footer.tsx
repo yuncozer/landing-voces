@@ -12,10 +12,10 @@ export default function FooterSection() {
           className="opacity-80"
         />
         <div className="flex gap-8 text-xs font-heading font-semibold tracking-wider uppercase">
-          <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">
+          <a href="https://www.instagram.com/sosvocesporvenezuela" target="_blank" rel="noopener noreferrer" className="text-white/40 no-underline hover:text-white transition-colors">
             Instagram
           </a>
-          <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">
+          <a href="https://x.com/sosvocesporvzla" target="_blank" rel="noopener noreferrer" className="text-white/40 no-underline hover:text-white transition-colors">
             X
           </a>
           <a href="#" className="text-white/40 no-underline hover:text-white transition-colors">

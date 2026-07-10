@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#about", label: "Quiénes Somos" },
   { href: "#how", label: "Suma tu voz" },
   { href: "#voices", label: "Voces" },
+  { href: "#directorio", label: "Donar" },
 ];
 
 export default function Nav() {

@@ -32,11 +32,18 @@ interface Tweet {
   reply_count: number;
   user: TweetUser;
   mediaDetails?: MediaDetail[];
+  quoted_tweet?: {
+    id_str: string;
+    text: string;
+    created_at: string;
+    user: TweetUser;
+    mediaDetails?: MediaDetail[];
+  };
 }
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr);
-  const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+  const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
@@ -44,7 +51,8 @@ function stripUrls(text: string): string {
   return text.replace(/https?:\/\/t\.co\/\w+/g, "").trim();
 }
 
-function formatCount(n: number): string {
+function formatCount(n: number | undefined | null): string {
+  if (!n) return "0";
   if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
   if (n >= 1000) return (n / 1000).toFixed(1) + "K";
   return String(n);
@@ -66,7 +74,7 @@ export default function VoicesSection() {
           setTweets(data.tweets);
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
@@ -98,7 +106,7 @@ export default function VoicesSection() {
 
         <div className="flex justify-center mt-10 reveal reveal-delay-2">
           <a
-            href="https://x.com/MundoConVzla"
+            href="https://x.com/sosvocesporvzla"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-heading text-white/30 hover:text-yellow-brand text-xs tracking-[0.2em] uppercase transition-colors"
@@ -203,12 +211,32 @@ const TweetCard = memo(function TweetCard({ tweet }: { tweet: Tweet }) {
           {stripUrls(tweet.text)}
         </p>
 
+        {tweet.quoted_tweet && (
+          <div className="mb-3 p-3 rounded-xl border border-white/10 bg-white/[0.02] text-xs relative">
+            <div className="flex items-center gap-2 mb-1.5">
+              <img
+                src={tweet.quoted_tweet.user.profile_image_url_https}
+                alt=""
+                className="w-5 h-5 rounded-full shrink-0"
+              />
+              <span className="font-heading font-semibold text-white/90 truncate max-w-[120px]">
+                {tweet.quoted_tweet.user.name}
+              </span>
+              <span className="font-heading text-[10px] text-white/40 truncate">
+                @{tweet.quoted_tweet.user.screen_name}
+              </span>
+            </div>
+            <p className="font-body text-white/70 leading-relaxed line-clamp-3">
+              {stripUrls(tweet.quoted_tweet.text)}
+            </p>
+          </div>
+        )}
+
         {hasImage && (
           <div className="mb-3">
             <div
-              className={`grid gap-1 rounded-xl overflow-hidden ${
-                images.length === 1 ? "grid-cols-1" : "grid-cols-2"
-              }`}
+              className={`grid gap-1 rounded-xl overflow-hidden ${images.length === 1 ? "grid-cols-1" : "grid-cols-2"
+                }`}
             >
               {images.slice(0, 4).map((img, i) => (
                 <div key={i} className={`relative overflow-hidden ${images.length === 3 && i === 0 ? "row-span-2" : ""}`}>

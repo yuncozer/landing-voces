@@ -19,6 +19,9 @@ const translations: Record<string, Record<string, string | string[]>> = {
 
     "countdown.before": "Comienza en",
     "countdown.after": "Llevamos al aire",
+    "countdown.completed": "Estuvimos al aire",
+    "countdown.date": "10 de julio de 2026",
+    "countdown.upcoming": "Próximamente más transmisiones",
     "countdown.days": "días",
     "countdown.hours": "horas",
     "countdown.minutes": "min",
@@ -124,6 +127,9 @@ const translations: Record<string, Record<string, string | string[]>> = {
 
     "countdown.before": "Starts in",
     "countdown.after": "We've been live for",
+    "countdown.completed": "We were live for",
+    "countdown.date": "July 10, 2026",
+    "countdown.upcoming": "More broadcasts coming soon",
     "countdown.days": "days",
     "countdown.hours": "hrs",
     "countdown.minutes": "min",
